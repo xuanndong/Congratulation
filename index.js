@@ -5,13 +5,14 @@ const main = document.querySelector(".main");
 // Clean up event listeners when letter is closed
 function closeLetter() {
     letter.classList.remove('open');
-    main.style.display = "none";
-    document.body.style.background = "#000"
+    
     setTimeout(() => {
         letter.style.display = 'none';
         endScreen.classList.remove('show');
         currentIndex = 0;
-        startSlideshow();
+        // startSlideshow();
+        main.style.display = "none";
+        document.body.style.background = "#000"
     }, 1000);
 }
 
