@@ -1,3 +1,5 @@
+const letter = document.querySelector('.letter');
+
 // Clean up event listeners when letter is closed
 function closeLetter() {
     letter.classList.remove('open');
@@ -157,7 +159,6 @@ function initMain() {
 
     const slideshow = document.querySelector('.slideshow');
     const endScreen = document.querySelector('.end-screen');
-    const letter = document.querySelector('.letter');
     const floatingImages = [];
     const imageFragment = document.createDocumentFragment();
 
