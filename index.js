@@ -1,7 +1,6 @@
 const letter = document.querySelector('.letter');
 const wrapper = document.querySelector(".wrapper");
 const main = document.querySelector(".main");
-const carousel = document.querySelector('.carousel-container');
 const slideshow = document.querySelector('.slideshow')
 
 // Clean up event listeners when letter is closed
@@ -10,11 +9,9 @@ function closeLetter() {
     
     setTimeout(() => {
         letter.style.display = 'none';
-        endScreen.classList.remove('show');
+        endScreen.classList.add('show');
         currentIndex = 0;
         // startSlideshow();
-        carousel.style.display = 'none';
-        slideshow.style.display = 'none';
     }, 1000);
 }
 
