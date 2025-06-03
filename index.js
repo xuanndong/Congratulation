@@ -257,11 +257,6 @@ function initMain() {
     }
 
     // letter.addEventListener('click', closeLetter);
-    nhac.ontimeupdate = () => {
-        if (nhac.currentTime >= 103) {
-            closeLetter();   
-        }
-    }
 
     // Cleanup function for when the page is unloaded
     window.addEventListener('beforeunload', function () {
@@ -269,7 +264,7 @@ function initMain() {
             clearInterval(slideshowInterval);
         }
         window.removeEventListener('resize', debouncedCarouselResize);
-        letter.removeEventListener('click', closeLetter);
+        // letter.removeEventListener('click', closeLetter);
     });
 }
 

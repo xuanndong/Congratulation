@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
     playWithSound = () => {
         nhac.muted = false;
         nhac.play();
+        nhac.ontimeupdate = () => {
+            if (nhac.currentTime >= 103) {
+                closeLetter();
+            }
+        }
     }
 
     document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
@@ -123,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (passwordInput.value.toLowerCase() === 'baovekhoaluan') {
             // pauseSound()
             passwordScreen.classList.add('hidden');
-            
+
             // Show success message before redirect
             const successMsg = document.createElement('div');
             successMsg.style.cssText = `
@@ -153,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Tạo phần hình ảnh
             const imageElement = document.createElement('img');
-            imageElement.src = 'assets/bye.jpg'; 
+            imageElement.src = 'assets/bye.jpg';
             imageElement.alt = 'Tạm biệt';
             imageElement.style.width = '200px';
             imageElement.style.height = '200px';
@@ -203,6 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 setTimeout(() => {
                     successMsg.style.display = "none";
+                    bgContainer.style.display = "none";
                     document.body.style.background = "#000";
                     startCountdown(() => {
                         setTimeout(() => {
