@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 }, 16000) // time
 
-            }, 3000); // time 
+            }, 3600); // time 
         } else {
             errors.style.display = 'flex';
             active.style.display = 'none';
