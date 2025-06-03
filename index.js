@@ -6,6 +6,7 @@ const main = document.querySelector(".main");
 function closeLetter() {
     letter.classList.remove('open');
     main.style.display = "none";
+    document.body.style.background = "#000"
     setTimeout(() => {
         letter.style.display = 'none';
         endScreen.classList.remove('show');
