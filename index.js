@@ -1,3 +1,16 @@
+const letter = document.querySelector('.letter');
+
+// Clean up event listeners when letter is closed
+function closeLetter() {
+    letter.classList.remove('open');
+    setTimeout(() => {
+        letter.style.display = 'none';
+        endScreen.classList.remove('show');
+        currentIndex = 0;
+        startSlideshow();
+    }, 1000);
+}
+
 
 // Debounce function to limit how often a function can be called
 function debounce(func, wait) {
@@ -146,7 +159,6 @@ function initMain() {
 
     const slideshow = document.querySelector('.slideshow');
     const endScreen = document.querySelector('.end-screen');
-    const letter = document.querySelector('.letter');
     const floatingImages = [];
     const imageFragment = document.createDocumentFragment();
 
@@ -244,17 +256,6 @@ function initMain() {
 
     // Start the slideshow
     startSlideshow();
-
-    // Clean up event listeners when letter is closed
-    function closeLetter() {
-        letter.classList.remove('open');
-        setTimeout(() => {
-            letter.style.display = 'none';
-            endScreen.classList.remove('show');
-            currentIndex = 0;
-            startSlideshow();
-        }, 1000);
-    }
 
     // letter.addEventListener('click', closeLetter);
 
