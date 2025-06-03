@@ -258,7 +258,7 @@ function initMain() {
 
     // letter.addEventListener('click', closeLetter);
     nhac.ontimeupdate = () => {
-        if (nhac.currentTime >= 102) {
+        if (nhac.currentTime >= 103) {
             closeLetter();   
         }
     }

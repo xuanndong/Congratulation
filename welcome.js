@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 setTimeout(() => {
                     successMsg.style.display = "none";
+                    document.body.style.background = "#000";
                     startCountdown(() => {
                         setTimeout(() => {
                             index_begin.style.display = 'none';
