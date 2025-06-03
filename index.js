@@ -1,6 +1,8 @@
 const letter = document.querySelector('.letter');
 const wrapper = document.querySelector(".wrapper");
 const main = document.querySelector(".main");
+const carousel = document.querySelector('.carousel-container');
+const slideshow = document.querySelector('.slideshow')
 
 // Clean up event listeners when letter is closed
 function closeLetter() {
@@ -11,8 +13,8 @@ function closeLetter() {
         endScreen.classList.remove('show');
         currentIndex = 0;
         // startSlideshow();
-        main.style.display = "none";
-        main.style.background = "000";
+        carousel.style.display = 'none';
+        slideshow.style.display = 'none';
     }, 1000);
 }
 
@@ -159,7 +161,6 @@ function initMain() {
         'assets/dd4b1e6f6165d53b8c7411.jpg',
     ];
 
-    const slideshow = document.querySelector('.slideshow');
     const endScreen = document.querySelector('.end-screen');
     const floatingImages = [];
     const imageFragment = document.createDocumentFragment();
