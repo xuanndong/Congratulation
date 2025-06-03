@@ -1,0 +1,452 @@
+/* Base styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Animated background elements */
+.confetti {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    z-index: 1;
+}
+
+.floating-icon {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.6;
+    z-index: 1;
+    animation: float 10s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+    }
+}
+
+/* Loading animation */
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #98cfb2, #7ab8a5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease;
+}
+
+.loading-text {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: pulse 1.5s infinite alternate;
+}
+
+.pendulum {
+    position: relative;
+    width: 220px;
+    height: 180px;
+    background-color: #f8c6cf;
+    border-radius: 5%;
+    border-top: 15px solid #eee7d5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.pendulum_box {
+    display: flex;
+    padding: 120px 0 0 10px;
+    position: absolute;
+    flex: 1;
+    width: 100%;
+    justify-content: center;
+}
+
+.ball {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #455681;
+    position: relative;
+    transform-origin: 50% -300%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ball::before {
+    content: '';
+    width: 2px;
+    height: 120px;
+    background-color: #fffeff;
+    left: 18px;
+    top: -120px;
+    position: absolute;
+}
+
+.ball.first {
+    animation: firstball 1.2s alternate ease-in infinite;
+}
+
+.ball.last {
+    animation: lastball 1.2s alternate ease-out infinite;
+}
+
+@keyframes firstball {
+    0% {
+        transform: rotate(35deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes lastball {
+    50% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-35deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* Main content styles */
+.main-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    width: 100%;
+    z-index: 2;
+}
+
+.container {
+    margin: 20px auto;
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    transform: translateY(20px);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #4CAF50, #2196F3, #9C27B0);
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 12px 45px 12px 15px;
+    width: 100%;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.toggle-password img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.hidden {
+    display: none;
+}
+
+#error-message {
+    color: #f44336;
+    margin-top: 10px;
+    font-weight: 500;
+    animation: shake 0.5s;
+}
+
+.encouragement {
+    margin-top: 20px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 665px) {
+    .container {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .loading-text {
+        font-size: 1.3rem;
+    }
+
+    .pendulum {
+        width: 200px;
+        height: 180px;
+    }
+
+    .ball {
+        height: 30px;
+        width: 30px;
+    }
+
+    .ball::before {
+        left: 13px;
+        height: 100px;
+        top: -100px;
+    }
+}
+
+@media (min-width: 666px) {
+    .container {
+        max-width: 500px;
+        padding: 40px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    input {
+        padding: 14px 50px 14px 20px;
+        font-size: 17px;
+    }
+
+    button {
+        padding: 14px 35px;
+        font-size: 17px;
+    }
+}
+
+.suggest {
+    font-family: 'Dancing Script', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #d41818;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite alternate;
+    position: relative;
+    display: inline-block;
+    padding: 0 30px;
+}
+
+.suggest::before,
+.suggest::after {
+    content: "❤";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+.suggest::before {
+    left: 0;
+}
+
+.suggest::after {
+    right: 0;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    100% {
+        transform: scale(1.05);
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .suggest {
+        font-size: 2rem;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .suggest {
+        font-size: 1.6rem;
+        padding: 0 15px;
+    }
+
+    .suggest::before,
+    .suggest::after {
+        font-size: 1.2rem;
+    }
+}
+
+
+
+/* Thêm vào CSS */
+.countdown-overlay {
+    background: radial-gradient(ellipse at center, 
+                rgba(0,0,0,0.9) 0%, 
+                rgba(0,0,0,0.95) 100%);
+}
+
+.countdown-number {
+    font-family: 'Arial Black', sans-serif;
+    color: #FFD700; /* Màu vàng */
+    text-shadow: 0 0 10px #FFD700, 
+                 0 0 20px #FFD700, 
+                 0 0 30px #FFD700;
+}
+
+
+/* Countdown styles */
+.countdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.countdown-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.countdown-number {
+    font-size: 10rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    animation: zoomFade 1s ease-out forwards;
+}
+
+@keyframes zoomFade {
+    0% {
+        transform: scale(3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+}

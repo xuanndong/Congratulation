@@ -1,0 +1,613 @@
+/* 3D Cylinder Carousel */
+.carousel-container {
+    height: 33vh;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+.carousel {
+    position: relative;
+    width: 80%;
+    max-width: 265px;
+    height: 69%;
+    min-height: 180px;
+    transform-style: preserve-3d;
+    animation: rotate 18s infinite linear;
+}
+
+.carousel-item {
+    position: absolute;
+    margin-top: 5%;
+    width: 50%;
+    height: 90%;
+    left: 25%;
+    top: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s;
+    transform-origin: center center -150px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(20%) brightness(90%);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateY(0);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+/* 3D Starry Slideshow */
+.slideshow {
+    position: relative;
+    height: 67vh;
+    min-height: 400px;
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+/* Stars */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) infinite ease-in-out;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Floating Images */
+.floating-image {
+    position: absolute;
+    width: 120px;
+    height: 160px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform-style: preserve-3d;
+    transition: all 2s ease-in-out;
+    z-index: 1;
+    filter: brightness(0.5) blur(1px);
+    opacity: 0.7;
+}
+
+.floating-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.floating-image.active {
+    width: 300px;
+    height: 400px;
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    filter: none;
+    opacity: 1;
+}
+
+.floating-image.active img {
+    transform: scale(1.05);
+}
+
+/* Letter Animation */
+.letter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    width: 300px;
+    height: 200px;
+    background: #fff9e6;
+    border: 1px solid #e0d0b1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    transition: all 0.8s ease-in-out;
+    transform-origin: center;
+    overflow: hidden;
+}
+
+.letter.open {
+    cursor: pointer;
+    width: 90%;
+    height: 90%;
+    max-width: 800px;
+    max-height: 600px;
+    transform: translate(-50%, -50%) scale(1);
+    border-radius: 5px;
+}
+
+.letter-content {
+    padding: 0px;
+    padding-top: 0px;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out 0.5s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.letter.open .letter-content {
+    opacity: 1;
+}
+
+.letter h1 {
+    color: #8b4513;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.letter p {
+    color: #5a4a42;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.letter-fold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #f5e8c9;
+    transform-origin: top;
+    transition: transform 0.8s ease-in-out;
+    z-index: 2;
+}
+
+.letter.open .letter-fold {
+    transform: rotateX(180deg);
+}
+
+/* Final Dark Screen */
+.end-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 999;
+}
+
+.end-screen.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.end-screen h1 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.end-screen p {
+    color: #ccc;
+    font-size: 1.2rem;
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Desktop Layout - Row */
+@media (min-width: 666px) {
+    .main {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .carousel-container {
+        width: 50%;
+        height: 100%;
+        min-height: auto;
+    }
+
+    .slideshow {
+        width: 50%;
+        height: 100%;
+        min-height: auto;
+    }
+
+    .carousel {
+        max-width: 300px;
+        height: 50%;
+    }
+
+    .carousel-item {
+        transform-origin: center center -180px;
+    }
+
+    .floating-image {
+        width: 120px;
+        height: 160px;
+    }
+
+    .floating-image.active {
+        width: 280px;
+        height: 290px;
+    }
+
+    .letter {
+        width: 400px;
+        height: 300px;
+    }
+}
+
+/* Larger screens */
+@media (min-width: 900px) {
+    .carousel {
+        max-width: 350px;
+        height: 60%;
+    }
+
+    .carousel-item {
+        transform-origin: center center -200px;
+    }
+
+    .floating-image {
+        width: 150px;
+        height: 200px;
+    }
+
+    .floating-image.active {
+        width: 350px;
+        height: 450px;
+    }
+
+    .letter {
+        width: 500px;
+        height: 400px;
+    }
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    .carousel-container {
+        min-height: 300px;
+    }
+
+    .carousel {
+        width: 100%;
+        height: 70%;
+    }
+
+    .carousel-item {
+        transform-origin: center center -100px;
+    }
+
+    .slideshow {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container {
+        min-height: 180px;
+    }
+
+    .carousel {
+        width: 95%;
+        height: 80%;
+    }
+
+    .carousel-item {
+        transform-origin: center center -80px;
+        border-radius: 5px;
+    }
+
+    .slideshow {
+        min-height: 300px;
+    }
+
+    .floating-image {
+        width: 100px;
+        height: 140px;
+    }
+
+    .floating-image.active {
+        width: 250px;
+        height: 350px;
+    }
+
+    .letter h1 {
+        font-size: 1.5rem;
+    }
+
+    .letter p {
+        font-size: 1rem;
+    }
+}
+
+/* Letter Animation Styles */
+.letter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    width: 300px;
+    height: 200px;
+    z-index: 1000;
+    display: none;
+    transition: all 1s ease-in-out;
+    transform-origin: center;
+    perspective: 1000px;
+}
+
+.letter.open {
+    width: 90%;
+    height: 90%;
+    max-width: 600px;
+    max-height: 500px;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Phong bì */
+.letter-envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #e74c3c;
+    border-radius: 5px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.6s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.letter.open .letter-envelope {
+    transform: rotateX(180deg);
+    opacity: 0;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 100px solid #c0392b;
+    transform-origin: top;
+    transition: all 0.6s ease-in-out;
+}
+
+.letter.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+/* Lá thư */
+.letter-paper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff9e6;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.6s ease-in-out 0.3s;
+}
+
+.letter.open .letter-paper {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Nội dung thư */
+.letter-content {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.letter-content h1 {
+    color: #e74c3c;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.letter-content p {
+    color: #5a4a42;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 5px 0;
+    max-width: 80%;
+}
+
+.letter-content .highlight {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.letter-content .signature {
+    margin-top: 5px;
+    font-style: italic;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Con dấu */
+.seal-wrap {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+}
+
+.seal {
+    width: 80px;
+    height: 80px;
+    background: #e74c3c;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transform: rotate(15deg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+/* Confetti effect */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f0f;
+    opacity: 0;
+}
+
+.letter.open .confetti {
+    animation: confetti 3s ease-in-out forwards;
+}
+
+.confetti:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    background-color: #e74c3c;
+    animation-delay: 0.5s;
+}
+
+.confetti:nth-child(2) {
+    top: 15%;
+    right: 20%;
+    background-color: #3498db;
+    animation-delay: 0.8s;
+}
+
+.confetti:nth-child(3) {
+    bottom: 20%;
+    left: 50%;
+    background-color: #2ecc71;
+    animation-delay: 1.1s;
+}
+
+@keyframes confetti {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .letter-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .letter-content p {
+        font-size: 0.8rem;
+        max-width: 90%;
+    }
+
+    .seal {
+        width: 60px;
+        height: 60px;
+        font-size: 0.5rem;
+    }
+
+    .seal-wrap {
+        top: 5px;
+        right: 20px;
+    }
+}
+
+
+/* Thêm style cho hình ảnh sinh viên */
+.student-image {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 5px;
+    object-fit: contain;
+}
+
+/* Điều chỉnh lại phần letter content */
+.letter-content {
+    padding: 5px;
+    overflow-y: auto;
+    max-height: 90%;
+}
+
+/* Thêm scrollbar đẹp cho letter content */
+.letter-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+    background-color: rgba(231, 76, 60, 0.5);
+    border-radius: 6px;
+}

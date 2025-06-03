@@ -5,642 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Congratulation</title>
+    <link rel="stylesheet" href="welcome.css">
     <link rel="stylesheet" href="loading.css">
-
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        /* 3D Cylinder Carousel */
-        .carousel-container {
-            height: 33vh;
-            min-height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .carousel-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            z-index: 1;
-        }
-
-        .carousel {
-            position: relative;
-            width: 80%;
-            max-width: 265px;
-            height: 69%;
-            min-height: 180px;
-            transform-style: preserve-3d;
-            animation: rotate 18s infinite linear;
-        }
-
-        .carousel-item {
-            position: absolute;
-            margin-top: 5%;
-            width: 50%;
-            height: 90%;
-            left: 25%;
-            top: 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.5s;
-            transform-origin: center center -150px;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: sepia(20%) brightness(90%);
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotateY(0);
-            }
-
-            to {
-                transform: rotateY(360deg);
-            }
-        }
-
-        /* 3D Starry Slideshow */
-        .slideshow {
-            position: relative;
-            height: 67vh;
-            min-height: 400px;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            overflow: hidden;
-            perspective: 1000px;
-        }
-
-        /* Stars */
-        .stars {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-
-            0%,
-            100% {
-                opacity: 0.2;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* Floating Images */
-        .floating-image {
-            position: absolute;
-            width: 120px;
-            height: 160px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            transform-style: preserve-3d;
-            transition: all 2s ease-in-out;
-            z-index: 1;
-            filter: brightness(0.5) blur(1px);
-            opacity: 0.7;
-        }
-
-        .floating-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .floating-image.active {
-            width: 300px;
-            height: 400px;
-            z-index: 10;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
-            filter: none;
-            opacity: 1;
-        }
-
-        .floating-image.active img {
-            transform: scale(1.05);
-        }
-
-        /* Letter Animation */
-        .letter {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.1);
-            width: 300px;
-            height: 200px;
-            background: #fff9e6;
-            border: 1px solid #e0d0b1;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            display: none;
-            transition: all 0.8s ease-in-out;
-            transform-origin: center;
-            overflow: hidden;
-        }
-
-        .letter.open {
-            cursor: pointer;
-            width: 90%;
-            height: 90%;
-            max-width: 800px;
-            max-height: 600px;
-            transform: translate(-50%, -50%) scale(1);
-            border-radius: 5px;
-        }
-
-        .letter-content {
-            padding: 0px;
-            padding-top: 0px;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out 0.5s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .letter.open .letter-content {
-            opacity: 1;
-        }
-
-        .letter h1 {
-            color: #8b4513;
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .letter p {
-            color: #5a4a42;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            max-width: 600px;
-        }
-
-        .letter-fold {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: #f5e8c9;
-            transform-origin: top;
-            transition: transform 0.8s ease-in-out;
-            z-index: 2;
-        }
-
-        .letter.open .letter-fold {
-            transform: rotateX(180deg);
-        }
-
-        /* Final Dark Screen */
-        .end-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.8s ease-in-out;
-            z-index: 999;
-        }
-
-        .end-screen.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .end-screen h1 {
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .end-screen p {
-            color: #ccc;
-            font-size: 1.2rem;
-            max-width: 600px;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        /* Desktop Layout - Row */
-        @media (min-width: 666px) {
-            .main {
-                display: flex;
-                flex-direction: row;
-                height: 100vh;
-                overflow: hidden;
-            }
-
-            .carousel-container {
-                width: 50%;
-                height: 100%;
-                min-height: auto;
-            }
-
-            .slideshow {
-                width: 50%;
-                height: 100%;
-                min-height: auto;
-            }
-
-            .carousel {
-                max-width: 300px;
-                height: 50%;
-            }
-
-            .carousel-item {
-                transform-origin: center center -180px;
-            }
-
-            .floating-image {
-                width: 120px;
-                height: 160px;
-            }
-
-            .floating-image.active {
-                width: 280px;
-                height: 290px;
-            }
-
-            .letter {
-                width: 400px;
-                height: 300px;
-            }
-        }
-
-        /* Larger screens */
-        @media (min-width: 900px) {
-            .carousel {
-                max-width: 350px;
-                height: 60%;
-            }
-
-            .carousel-item {
-                transform-origin: center center -200px;
-            }
-
-            .floating-image {
-                width: 150px;
-                height: 200px;
-            }
-
-            .floating-image.active {
-                width: 350px;
-                height: 450px;
-            }
-
-            .letter {
-                width: 500px;
-                height: 400px;
-            }
-        }
-
-        /* Media Queries for Mobile */
-        @media (max-width: 768px) {
-            .carousel-container {
-                min-height: 300px;
-            }
-
-            .carousel {
-                width: 100%;
-                height: 70%;
-            }
-
-            .carousel-item {
-                transform-origin: center center -100px;
-            }
-
-            .slideshow {
-                min-height: 350px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .carousel-container {
-                min-height: 180px;
-            }
-
-            .carousel {
-                width: 95%;
-                height: 80%;
-            }
-
-            .carousel-item {
-                transform-origin: center center -80px;
-                border-radius: 5px;
-            }
-
-            .slideshow {
-                min-height: 300px;
-            }
-
-            .floating-image {
-                width: 100px;
-                height: 140px;
-            }
-
-            .floating-image.active {
-                width: 250px;
-                height: 350px;
-            }
-
-            .letter h1 {
-                font-size: 1.5rem;
-            }
-
-            .letter p {
-                font-size: 1rem;
-            }
-        }
-    </style>
-
-    <style>
-        /* Letter Animation Styles */
-        .letter {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.1);
-            width: 300px;
-            height: 200px;
-            z-index: 1000;
-            display: none;
-            transition: all 1s ease-in-out;
-            transform-origin: center;
-            perspective: 1000px;
-        }
-
-        .letter.open {
-            width: 90%;
-            height: 90%;
-            max-width: 600px;
-            max-height: 500px;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        /* Phong bì */
-        .letter-envelope {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #e74c3c;
-            border-radius: 5px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: all 0.6s ease-in-out;
-            transform-style: preserve-3d;
-        }
-
-        .letter.open .letter-envelope {
-            transform: rotateX(180deg);
-            opacity: 0;
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 100px solid #c0392b;
-            transform-origin: top;
-            transition: all 0.6s ease-in-out;
-        }
-
-        .letter.open .envelope-flap {
-            transform: rotateX(180deg);
-        }
-
-        /* Lá thư */
-        .letter-paper {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #fff9e6;
-            border-radius: 3px;
-            padding: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(20px) scale(0.9);
-            transition: all 0.6s ease-in-out 0.3s;
-        }
-
-        .letter.open .letter-paper {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        /* Nội dung thư */
-        .letter-content {
-            position: relative;
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .letter-content h1 {
-            color: #e74c3c;
-            font-size: 2rem;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .letter-content p {
-            color: #5a4a42;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin: 5px 0;
-            max-width: 80%;
-        }
-
-        .letter-content .highlight {
-            color: #e74c3c;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .letter-content .signature {
-            margin-top: 5px;
-            font-style: italic;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        /* Con dấu */
-        .seal-wrap {
-            position: absolute;
-            top: 10px;
-            right: 30px;
-        }
-
-        .seal {
-            width: 80px;
-            height: 80px;
-            background: #e74c3c;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: bold;
-            transform: rotate(15deg);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            border: 2px dashed rgba(255, 255, 255, 0.5);
-        }
-
-        /* Confetti effect */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f0f;
-            opacity: 0;
-        }
-
-        .letter.open .confetti {
-            animation: confetti 3s ease-in-out forwards;
-        }
-
-        .confetti:nth-child(1) {
-            top: 10%;
-            left: 20%;
-            background-color: #e74c3c;
-            animation-delay: 0.5s;
-        }
-
-        .confetti:nth-child(2) {
-            top: 15%;
-            right: 20%;
-            background-color: #3498db;
-            animation-delay: 0.8s;
-        }
-
-        .confetti:nth-child(3) {
-            bottom: 20%;
-            left: 50%;
-            background-color: #2ecc71;
-            animation-delay: 1.1s;
-        }
-
-        @keyframes confetti {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .letter-content h1 {
-                font-size: 1.6rem;
-            }
-
-            .letter-content p {
-                font-size: 0.8rem;
-                max-width: 90%;
-            }
-
-            .seal {
-                width: 60px;
-                height: 60px;
-                font-size: 0.5rem;
-            }
-
-            .seal-wrap {
-                top: 5px;
-                right: 20px;
-            }
-        }
-
-
-        /* Thêm style cho hình ảnh sinh viên */
-        .student-image {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 5px;
-            object-fit: contain;
-        }
-
-        /* Điều chỉnh lại phần letter content */
-        .letter-content {
-            padding: 5px;
-            overflow-y: auto;
-            max-height: 90%;
-        }
-
-        /* Thêm scrollbar đẹp cho letter content */
-        .letter-content::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .letter-content::-webkit-scrollbar-thumb {
-            background-color: rgba(231, 76, 60, 0.5);
-            border-radius: 6px;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 
 </head>
 
 <body>
 
-    <audio controls autoplay style="display: none">
-        <source src="mp3">
-    </audio>
+    <div class="index_begin">
+        <video src="assets/5211912533011975583.mp4" controls muted style="display: none;"></video>
 
-    <!-- Loading animation -->
-    <div class="wrapper">
+        <!-- Animated background elements -->
+        <div id="background-elements" style="z-index: -1;"></div>
+
+        <!-- Loading screen -->
+        <div class="loading-container">
+            <div class="loading-text">Loading...</div>
+            <div class="pendulum">
+                <div class="pendulum_box">
+                    <div class="ball first"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball last"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <div class="container" id="password-screen">
+                <div class="create">
+                    <h1>Hôm nay là ngày trọng đại!</h1>
+                    <div class="password-container">
+                        <input type="password" id="password-input" placeholder="Nhập mật khẩu...">
+                        <div class="toggle-password" id="toggle-password">
+                            <img src="assets/hide.png" alt="Hiển thị mật khẩu" id="password-icon">
+                        </div>
+                    </div>
+                    <button id="submit-btn">Xác nhận</button>
+                    <p class="encouragement">Hôm nay là ngày anh chị tỏa sáng</p>
+                </div>
+                <div class="errors" style="display: none; flex-direction: column;">
+                    <p id="error-message">Mật khẩu còn không biết, thôi ở nhà đi </p>
+                    <img class="error_img"
+                        style="display: flex; width: 80%; height: 80%; margin: auto; border-radius: 12px;"
+                        src="assets/meme.jpg" alt="">
+                </div>
+
+                <h1 class="suggest" style="display: none;">Rủ lòng thương cho thêm cơ hội đó</h1>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" style="display: none;">
         <div class="candles">
             <div class="light__wave"></div>
             <div class="candle1">
@@ -666,45 +86,38 @@
             <div class="candle2__fire"></div>
             <div class="sparkles-one"></div>
             <div class="sparkles-two"></div>
-            <div class="candle__smoke-one">
-
-            </div>
-            <div class="candle__smoke-two">
-
-            </div>
-
+            <div class="candle__smoke-one"></div>
+            <div class="candle__smoke-two"></div>
         </div>
-        <div class="floor">
-        </div>
-
+        <div class="floor"></div>
     </div>
 
-    <div class="main">
+    <div class="main" style="display: none;">
         <div class="carousel-container">
             <div class="carousel">
                 <div class="carousel-item">
-                    <img src="image1.png" alt="Memory 1">
+                    <img src="assets/dc252a35a63d12634b2c8.jpg" alt="Memory 1" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="image2.png" alt="Memory 2">
+                    <img src="assets/40c124cda8c51c9b45d47.jpg" alt="Memory 2" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="image3.png" alt="Memory 3">
+                    <img src="assets/69e754ddd8d56c8b35c44.jpg" alt="Memory 3" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="image1.png" alt="Memory 4">
+                    <img src="assets/76cb05e989e13dbf64f01.jpg" alt="Memory 4" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="image2.png" alt="Memory 5">
+                    <img src="assets/536c336abf620b3c52735.jpg" alt="Memory 5" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="image3.png" alt="Memory 6">
+                    <img src="assets/61289af2e5f851a608e910.jpg" alt="Memory 6" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="image2.png" alt="Memory 7">
+                    <img src="assets/b644b04a3c42881cd1536.jpg" alt="Memory 7" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="image1.png" alt="Memory 8">
+                    <img src="assets/dac24cf4c0fc74a22ded2.jpg" alt="Memory 8" loading="lazy">
                 </div>
             </div>
         </div>
@@ -725,14 +138,14 @@
                     <div class="confetti"></div>
                     <div class="confetti"></div>
                     <div class="confetti"></div>
-                    <!-- Thêm hình ảnh sinh viên -->
-                    <img src="graduation.png" alt="Sinh viên"
-                        class="student-image">
+                    <img src="assets/graduation.png" alt="Sinh viên" class="student-image" loading="lazy">
                     <h1>Chúc Mừng anh chị!</h1>
                     <p class="highlight">Anh chị đã đi một chặng đường dài để đến hôm nay.</p>
-                    <p>Hãy tự tin thể hiện những gì anh chị đã làm được. Buổi bảo vệ đồ án này là cơ hội để anh chị tỏa sáng!
-                    </p>
-                    <p>Bọn em tin rằng với sự chuẩn bị kỹ lưỡng và tinh thần quyết tâm, anh chị sẽ đạt được kết quả xuất
+                    <p>Hãy tự tin thể hiện những gì anh chị đã làm được. Buổi bảo vệ đồ án này là cơ hội để anh chị
+                        tỏa
+                        sáng!</p>
+                    <p>Bọn em tin rằng với sự chuẩn bị kỹ lưỡng và tinh thần quyết tâm, anh chị sẽ đạt được kết quả
+                        xuất
                         sắc.</p>
                     <p class="signature">Tin tưởng vào chính mình!</p>
                     <div class="seal-wrap">
@@ -747,240 +160,9 @@
         <!-- Final Dark Screen -->
         <div class="end-screen"></div>
     </div>
-    <script>
 
-        const wrapper = document.querySelector(".wrapper")
-        const main = document.querySelector(".main")
-
-        // Hàm thiết lập display cho main content
-        function setMainDisplay() {
-            if (window.innerWidth >= 665) {
-                main.style.display = 'flex';
-            } else {
-                main.style.display = 'block';
-            }
-        }
-
-        function init() {
-            wrapper.style.display = 'flex'
-            main.style.display = 'none'
-
-            const loadingDuration = 6000;
-
-            // Sau khi loading xong
-            setTimeout(function () {
-                // Ẩn loading
-                wrapper.style.display = 'none';
-
-                setMainDisplay();
-
-                // Theo dõi thay đổi kích thước màn hình
-                window.addEventListener('resize', function () {
-                    // Chỉ cập nhật nếu main đang hiển thị
-                    if (wrapper.style.display === 'none') {
-                        // Hiển thị main content
-                        setMainDisplay();
-                    }
-                });
-
-                main.style.position = "relative";
-                document.body.style.margin = 0;
-                document.body.style.padding = 0;
-                document.body.style.boxSizing = 'border-box'
-
-                // Khởi chạy các hiệu ứng của main content
-                initMain();
-            }, loadingDuration);
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            init()
-        })
-
-        // Position carousel items in 3D space
-
-        function initMain() {
-            const carouselItems = document.querySelectorAll('.carousel-item');
-            const angle = 360 / carouselItems.length;
-
-            function positionCarouselItems() {
-                let zTranslation;
-                if (window.innerWidth >= 666) {
-                    zTranslation = 180;
-                } else if (window.innerWidth < 768) {
-                    zTranslation = window.innerWidth < 480 ? 80 : 100;
-                } else {
-                    zTranslation = 150;
-                }
-
-                carouselItems.forEach((item, index) => {
-                    item.style.transform = `rotateY(${angle * index}deg) translateZ(${zTranslation}px)`;
-                });
-            }
-
-            positionCarouselItems();
-            window.addEventListener('resize', positionCarouselItems);
-
-            // Create stars
-            const starsContainer = document.getElementById('stars');
-            const starCount = 200;
-
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-
-                // Random position
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-
-                // Random size (0.5px to 2px)
-                const size = Math.random() * 1.5 + 0.5;
-
-                // Random animation duration (2s to 5s)
-                const duration = Math.random() * 3 + 2;
-
-                star.style.left = `${x}%`;
-                star.style.top = `${y}%`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.setProperty('--duration', `${duration}s`);
-
-                // Random delay
-                star.style.animationDelay = `${Math.random() * 5}s`;
-
-                starsContainer.appendChild(star);
-            }
-
-            // Floating images setup
-            const images = [
-                'image1.png',
-                'image2.png',
-                'image3.png',
-                'image1.png',
-                'image2.png',
-            ];
-
-            const slideshow = document.querySelector('.slideshow');
-            const endScreen = document.querySelector('.end-screen');
-            const letter = document.querySelector('.letter');
-            const floatingImages = [];
-
-            // Create floating images
-            images.forEach((imgSrc, index) => {
-                const imgContainer = document.createElement('div');
-                imgContainer.classList.add('floating-image');
-
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.alt = `Memory ${index + 1}`;
-
-                imgContainer.appendChild(img);
-                slideshow.appendChild(imgContainer);
-                floatingImages.push(imgContainer);
-
-                // Set initial random position and rotation
-                positionImage(imgContainer);
-            });
-
-            function positionImage(imgElement, center = false) {
-                if (center) {
-                    // Position at center
-                    imgElement.style.left = '50%';
-                    imgElement.style.top = '50%';
-                    imgElement.style.transform = 'translate(-50%, -50%) rotate(0)';
-                } else {
-                    // Random position
-                    const x = Math.random() * 80 + 10; // 10% to 90%
-                    const y = Math.random() * 80 + 10;
-
-                    // Random rotation (-30deg to 30deg)
-                    const rotate = Math.random() * 60 - 30;
-
-                    imgElement.style.left = `${x}%`;
-                    imgElement.style.top = `${y}%`;
-                    imgElement.style.transform = `translate(-50%, -50%) rotate(${rotate}deg)`;
-                }
-            }
-
-            // Slideshow animation
-            let currentIndex = 0;
-            const slideInterval = 3000; // 3 seconds per slide
-
-            function startSlideshow() {
-                // Reset all images
-                floatingImages.forEach(img => {
-                    img.classList.remove('active');
-                    positionImage(img);
-                });
-
-                // Show first image
-                floatingImages[currentIndex].classList.add('active');
-                positionImage(floatingImages[currentIndex], true);
-
-                // Start the cycle
-                const cycle = setInterval(() => {
-                    // Move current image away
-                    floatingImages[currentIndex].classList.remove('active');
-                    positionImage(floatingImages[currentIndex]);
-
-                    // Move to next image
-                    currentIndex = (currentIndex + 1) % floatingImages.length;
-
-                    if (currentIndex === 0) {
-                        // End of cycle
-                        clearInterval(cycle);
-
-                        // Show letter animation
-                        setTimeout(() => {
-                            // Show dark background first
-                            endScreen.classList.add('show');
-
-                            // Then show and open the letter
-                            setTimeout(() => {
-                                letter.style.display = 'block';
-                                setTimeout(() => {
-                                    letter.classList.add('open');
-                                }, 50);
-                            }, 500);
-
-                        }, 1000);
-
-                        return;
-                    }
-
-                    // Show next image
-                    floatingImages[currentIndex].classList.add('active');
-                    positionImage(floatingImages[currentIndex], true);
-
-                }, slideInterval);
-            }
-
-            // Start the slideshow
-            startSlideshow();
-
-            // Close letter when clicked (optional)
-            letter.addEventListener('click', function () {
-                letter.classList.remove('open');
-                setTimeout(() => {
-                    letter.style.display = 'none';
-                    endScreen.classList.remove('show');
-                    startSlideshow();
-                }, 1000);
-            });
-        }
-
-        // Thêm hiệu ứng khi mở thư
-        document.querySelector('.letter').addEventListener('click', function () {
-            this.classList.remove('open');
-            setTimeout(() => {
-                this.style.display = 'none';
-
-                init()
-
-            }, 1000);
-        });
-    </script>
-
+    <script src="welcome.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
