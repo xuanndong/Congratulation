@@ -1,8 +1,11 @@
 const letter = document.querySelector('.letter');
+const wrapper = document.querySelector(".wrapper");
+const main = document.querySelector(".main");
 
 // Clean up event listeners when letter is closed
 function closeLetter() {
     letter.classList.remove('open');
+    main.style.display = "none";
     setTimeout(() => {
         letter.style.display = 'none';
         endScreen.classList.remove('show');
@@ -24,9 +27,6 @@ function debounce(func, wait) {
         }, wait);
     };
 }
-
-const wrapper = document.querySelector(".wrapper");
-const main = document.querySelector(".main");
 
 // Hàm thiết lập display cho main content
 function setMainDisplay() {

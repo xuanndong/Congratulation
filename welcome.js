@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
         nhac.ontimeupdate = () => {
             if (nhac.currentTime >= 103) {
                 closeLetter();
-                console.log("av")
             }
         }
     }
