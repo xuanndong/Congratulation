@@ -12,7 +12,7 @@ function closeLetter() {
         currentIndex = 0;
         // startSlideshow();
         main.style.display = "none";
-        document.body.style.background = "#000"
+        main.style.background = "000";
     }, 1000);
 }
 
